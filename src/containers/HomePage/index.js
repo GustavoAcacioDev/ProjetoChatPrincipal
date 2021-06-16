@@ -4,7 +4,7 @@ import './../HomePage/index.css';
 import Menu from '../../components/Menu/index';
 import { useDispatch, useSelector } from 'react-redux';
 import { ChatSquareDots, ChevronCompactDown, ArrowUp, Geo, Archive, Person, PersonBadge, PersonBoundingBox, PersonCircle, ArrowRightCircle, Cursor } from 'react-bootstrap-icons';
-import { getRealtimeUsers, updateMessage, getRealtimeConversations } from '../../actions';
+import { getRealtimeUsers, getRealtimeUsers2, updateMessage, getRealtimeConversations } from '../../actions';
 import { IoPersonCircleOutline } from 'react-bootstrap-icons';
 import Header from '../../components/Header';
 
@@ -39,7 +39,7 @@ const HomePage = (props) => {
   const [message, setMessage] = useState('');
   const [userUid, setUserUid] = useState(null);
   let unsubscribe;
-
+  let unsubscribe2;
 
   useEffect(() => {
 
@@ -51,7 +51,7 @@ const HomePage = (props) => {
         console.log(error);
       })
 
-
+      
 
 
   }, []);

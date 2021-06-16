@@ -1,0 +1,161 @@
+.pai2{
+    display: flex; 
+    justify-Content: space-between;
+     height: 100vh;
+}
+
+
+.container2{
+    width: 100vw; 
+    display: flex; 
+    align-Items: center;
+    justify-content: center;
+}
+
+.formulario2{
+    width: 40vw;
+    height: 80vh;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    border-radius: 40px;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    box-shadow: 0px 0px 20px 9px #8d8f8f79; 
+}
+
+.titulo2{
+    font-Family: Radley; 
+    font-Size: 60px; 
+    margin : auto;
+    font-family: 'Quicksand', sans-serif;
+}
+
+.botao2{
+    display: flex; 
+    justify-Content: center;
+}
+
+.botao-cadastrar{
+        height: 50px;
+        width: 250px;
+        font-Size: 30px;
+        font-Family: Inria Sans;
+        background-Color: #FF8C00;
+        color: white;
+        border-Radius: 6px;
+        margin-Top: 50px;
+        border-Color: #FF8C00;
+}
+
+.nome{
+    height: 3em;
+   width: 20vw;
+   border: none;
+   border-bottom : 1px solid gray;
+   padding: 0px 0px 0px 10px;
+   letter-spacing: 1px;
+   background: transparent;
+   outline: none;
+   font-size: 14px;
+}
+
+.email2{
+   height: 3em;
+   width: 20vw;
+   border: none;
+   border-bottom : 1px solid gray;
+   padding: 0px 0px 0px 10px;
+   letter-spacing: 1px;
+   background: transparent;
+   outline: none;
+   font-size: 14px;
+}
+
+.senha2{
+   height: 3em;
+   width: 20vw;
+   border: none;
+   border-bottom : 1px solid gray;
+   padding: 0px 0px 0px 10px;
+   letter-spacing: 1px;
+   background: transparent;
+   outline: none;
+   font-size: 14px;
+}
+
+.telefone{
+   height: 3em;
+   width: 20vw;
+   border: none;
+   border-bottom : 1px solid gray;
+   padding: 0px 0px 0px 10px;
+   letter-spacing: 1px;
+   background: transparent;
+   outline: none;
+   font-size: 14px;
+}
+
+.especificacao{
+   height: 3em;
+   width: 20vw;
+   border: none;
+   border-bottom : 1px solid gray;
+   padding: 0px 0px 0px 10px;
+   letter-spacing: 1px;
+   background: transparent;
+   outline: none;
+   font-size: 14px;
+}
+
+.cpf{
+   height: 3em;
+   width: 20vw;
+   border: none;
+   border-bottom : 1px solid gray;
+   padding: 0px 0px 0px 10px;
+   letter-spacing: 1px;
+   background: transparent;
+   outline: none;
+   font-size: 14px;
+}
+.horaInicio{
+   height: 3em;
+   width: 20vw;
+   border: none;
+   border-bottom : 1px solid gray;
+   padding: 0px 0px 0px 10px;
+   letter-spacing: 1px;
+   background: transparent;
+   outline: none;
+   font-size: 14px;
+}
+.horaTermino{
+   height: 3em;
+   width: 20vw;
+   border: none;
+   border-bottom : 1px solid gray;
+   padding: 0px 0px 0px 10px;
+   letter-spacing: 1px;
+   background: transparent;
+   outline: none;
+   font-size: 14px;
+}
+
+.conjunto1{
+    display: flex;
+}
+
+.conjunto2{
+    display: flex;
+}
+
+.conjunto3{
+    display: flex;
+}
+.conjunto4{
+    display: flex;
+}

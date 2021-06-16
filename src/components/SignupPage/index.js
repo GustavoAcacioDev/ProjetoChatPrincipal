@@ -10,7 +10,7 @@ import { Redirect } from 'react-router-dom';
 * @function RegisterPage
 **/
 
-const RegisterClientePage = (props) => {
+const SignupPage = (props) => {
 
 
   const [firstName, setFirstName] = useState('');
@@ -42,6 +42,8 @@ const RegisterClientePage = (props) => {
       <div className="registerContainer">
         <Card>
           <form onSubmit={registerUser}>
+
+            <h3>Sign up</h3>
 
             <input
               name="firstName"
@@ -97,4 +99,4 @@ const RegisterClientePage = (props) => {
 
 }
 
-export default RegisterClientePage
+export default SignupPage;

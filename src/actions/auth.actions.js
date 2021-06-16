@@ -1,6 +1,9 @@
 import { auth, firestore } from 'firebase';
-import { authConstanst } from './constants';
+import { authConstanst, userConstants } from './constants';
 import { getRealtimeUsers } from './user.actions';
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import jwt_decode from "jwt-decode";
 
 export const signupAtendente = (user) => {
 
@@ -22,13 +25,16 @@ export const signupAtendente = (user) => {
                     .then(() => {
                         //if you are here means it is updated successfully
                         db.collection('users')
-                            .doc(data.user.uid)
+                            .doc('tipoUsuario').collection('userAdmin').doc(data.user.uid)
                             .set({
                                 firstName: user.firstName,
                                 lastName: user.lastName,
                                 cpf: user.cpf,
                                 cep: user.cep,
                                 especializacao: user.especializacao,
+                                telefone: user.telefone,
+                                horarioInicio: user.horarioInicio,
+                                horarioTermino: user.horarioTermino,
                                 uid: data.user.uid,
                                 createdAt: new Date(),
                                 isOnline: true
@@ -70,6 +76,50 @@ export const signupAtendente = (user) => {
 
 }
 
+export const listagemUsuarios = (uid) => {
+
+    return async () => {
+
+        const [firstName, setFirstName] = useState('');
+        const [lastName, setLastName] = useState('');
+        const [email, setEmail] = useState('');
+        const [especializacao, setEspec] = useState('');
+        const [telefone, setTel] = useState('');
+        const [horarioInicio, setInicio] = useState('');
+        const [horarioTermino, setTermino] = useState('');
+        const [cep, setCep] = useState('');
+        const [password, setPassword] = useState('');
+        const [cpf, setCpf] = useState('');
+        const [chatUser, setChatUser] = ('');
+        const [useruid, setUserUid] = ('');
+        const dispatch = useDispatch();
+        const auth = useSelector(state => state.auth);
+
+        const db = firestore();
+
+        const unsubscribe = db.collection("users").doc('tipoUsuario').collection('userAdmin')
+                //.where("uid", "!=", uid)
+                .onSnapshot((querySnapshot) => {
+                    const users = [];
+                    querySnapshot.forEach(function (doc) {
+                        if (doc.data().uid === uid) {
+                            users.push(doc.data());
+                        }
+                    });
+                    //console.log(users);
+
+                    dispatch({
+                        type: `${userConstants.GET_REALTIME_USERS}_SUCCESS`,
+                        payload: { users }
+                    });
+
+                });
+            return unsubscribe;
+    }
+
+}
+
+
 export const signupUser = (user) => {
 
     return async (dispatch) => {
@@ -89,7 +139,7 @@ export const signupUser = (user) => {
                 })
                     .then(() => {
                         //if you are here means it is updated successfully
-                        db.collection('usersCliente')
+                        db.collection('users').doc('tipoUsuario').collection('userComum')
                             .doc(data.user.uid)
                             .set({
                                 firstName: user.firstName,
@@ -144,7 +194,7 @@ export const signin = (user) => {
 
 
                 const db = firestore();
-                db.collection('users')
+                db.collection('users').doc('tipoUsuario').collection('userAdmin')
                     .doc(data.user.uid)
                     .update({
                         isOnline: true
@@ -155,10 +205,13 @@ export const signin = (user) => {
                         const lastName = name[1];
 
                         const loggedInUser = {
-                            firstName,
-                            lastName,
+                            firstName: user.firstName,
+                            lastName: user.lastName,
+                            cpf: user.cpf,
+                            cep: user.cep,
+                            especializacao: user.especializacao,
                             uid: data.user.uid,
-                            email: data.user.email
+                            email: user.email
                         }
 
                         localStorage.setItem('user', JSON.stringify(loggedInUser));
@@ -201,7 +254,7 @@ export const signinUser = (user) => {
 
 
                 const db = firestore();
-                db.collection('usersCliente')
+                db.collection('users').doc('tipoUsuario').collection('userComum')
                     .doc(data.user.uid)
                     .update({
                         isOnline: true
@@ -218,7 +271,7 @@ export const signinUser = (user) => {
                             email: data.user.email
                         }
 
-                        localStorage.setItem('user', JSON.stringify(loggedInUser));
+                        localStorage.setItem('userCliente', JSON.stringify(loggedInUser));
 
                         dispatch({
                             type: `${authConstanst.USER_LOGIN}_SUCCESS`,
@@ -252,6 +305,7 @@ export const isLoggedInUser = () => {
 
         const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null;
 
+
         if (user) {
             dispatch({
                 type: `${authConstanst.USER_LOGIN}_SUCCESS`,
@@ -274,7 +328,7 @@ export const logout = (uid) => {
         //Now lets logout user
 
         const db = firestore();
-        db.collection('users')
+        db.collection('users').doc('tipoUsuario').collection('userAdmin')
             .doc(uid)
             .update({
                 isOnline: false

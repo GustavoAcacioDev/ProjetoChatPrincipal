@@ -5,14 +5,14 @@ import Card from '../../components/UI/Card';
 import { signin, isLoggedInUser, signinUser } from '../../actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import '../LoginPage/login.css';
+import '../LoginClientePage/login.css';
 
 /**
 * @author
 * @function LoginPage
 **/
 
-const LoginPage = (props) => {
+const LoginClientePage = (props) => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -78,4 +78,4 @@ const LoginPage = (props) => {
 
 }
 
-export default LoginPage
+export default LoginClientePage
