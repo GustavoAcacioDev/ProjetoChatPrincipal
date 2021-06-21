@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {} from 'react';
 import { } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import './index.css';
@@ -10,24 +10,8 @@ const Menu = () => {
 
     const auth = useSelector(state => state.auth);
     const dispatch = useDispatch();
-    const user = useSelector(state => state.user);
-    const [chatStarted, setChatStarted] = useState(false);
-    const [chatUser, setChatUser] = useState('');
-    const [cpf, setCpf] = useState('');
-    const [message, setMessage] = useState('');
-    const [userUid, setUserUid] = useState(null);
 
-    const initChat = (user) => {
-
-        setChatStarted(true)
-        setChatUser(`${user.firstName} ${user.lastName}`)
-        setCpf(`${user.cpf}`)
-        setUserUid(user.uid);
-
-        console.log(user);
-
-
-    }
+    
     return (
 
 
@@ -48,9 +32,7 @@ const Menu = () => {
                         </Link>
                     </li>
                     <li>
-                        <Link to={'/atendente'} onClick={initChat} 
-                        key={user.uid}
-                        user={user}>
+                        <Link to={'/atendente'} >
                             <Person color=" #f5f6f8" size={35} />
                         </Link>
                     </li>

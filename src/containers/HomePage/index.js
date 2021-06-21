@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Col, Image } from 'react-bootstrap'
 import './../HomePage/index.css';
 import Menu from '../../components/Menu/index';
 import { useDispatch, useSelector } from 'react-redux';
-import { ChatSquareDots, ChevronCompactDown, ArrowUp, Geo, Archive, Person, PersonBadge, PersonBoundingBox, PersonCircle, ArrowRightCircle, Cursor } from 'react-bootstrap-icons';
-import { getRealtimeUsers, getRealtimeUsers2, updateMessage, getRealtimeConversations } from '../../actions';
-import { IoPersonCircleOutline } from 'react-bootstrap-icons';
-import Header from '../../components/Header';
+import { ChatSquareDots,PersonBoundingBox, PersonCircle, Cursor } from 'react-bootstrap-icons';
+import { getRealtimeUsers, updateMessage, getRealtimeConversations } from '../../actions';
 
 
 const User = (props) => {

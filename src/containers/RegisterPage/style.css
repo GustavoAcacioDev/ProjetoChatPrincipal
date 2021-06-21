@@ -1,18 +1,18 @@
-.pai2{
+.paiCadastro{
     display: flex; 
     justify-Content: space-between;
      height: 100vh;
 }
 
 
-.container2{
+.containerCadastro{
     width: 100vw; 
     display: flex; 
     align-Items: center;
     justify-content: center;
 }
 
-.formulario2{
+.formularioCadastro{
     width: 40vw;
     height: 80vh;
     margin: auto;
@@ -27,19 +27,19 @@
     box-shadow: 0px 0px 20px 9px #8d8f8f79; 
 }
 
-.titulo2{
+.tituloCadastro{
     font-Family: Radley; 
     font-Size: 60px; 
     margin : auto;
     font-family: 'Quicksand', sans-serif;
 }
 
-.botao2{
+.botaoCadastro{
     display: flex; 
     justify-Content: center;
 }
 
-.botao-cadastrar{
+.botao-cadastrarCadastro{
         height: 50px;
         width: 250px;
         font-Size: 30px;
@@ -51,7 +51,7 @@
         border-Color: #FF8C00;
 }
 
-.nome{
+.nomeCadastro{
     height: 3em;
    width: 20vw;
    border: none;
@@ -63,7 +63,7 @@
    font-size: 14px;
 }
 
-.email2{
+.emailCadastro{
    height: 3em;
    width: 20vw;
    border: none;
@@ -75,7 +75,7 @@
    font-size: 14px;
 }
 
-.senha2{
+.senhaCadastro{
    height: 3em;
    width: 20vw;
    border: none;
@@ -87,7 +87,7 @@
    font-size: 14px;
 }
 
-.telefone{
+.telefoneCadastro{
    height: 3em;
    width: 20vw;
    border: none;
@@ -99,7 +99,7 @@
    font-size: 14px;
 }
 
-.especificacao{
+.especificacaoCadastro{
    height: 3em;
    width: 20vw;
    border: none;
@@ -111,7 +111,7 @@
    font-size: 14px;
 }
 
-.cpf{
+.cpfCadastro{
    height: 3em;
    width: 20vw;
    border: none;
@@ -122,7 +122,7 @@
    outline: none;
    font-size: 14px;
 }
-.horaInicio{
+.horaInicioCadastro{
    height: 3em;
    width: 20vw;
    border: none;
@@ -133,7 +133,7 @@
    outline: none;
    font-size: 14px;
 }
-.horaTermino{
+.horaTerminoCadastro{
    height: 3em;
    width: 20vw;
    border: none;
@@ -145,17 +145,6 @@
    font-size: 14px;
 }
 
-.conjunto1{
-    display: flex;
-}
-
-.conjunto2{
-    display: flex;
-}
-
-.conjunto3{
-    display: flex;
-}
-.conjunto4{
+.conjuntoCadastro{
     display: flex;
 }

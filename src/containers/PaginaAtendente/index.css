@@ -1,20 +1,20 @@
-.ContainerPrincipal2 {
+.ContainerPrincipalAtendente {
     display: flex;
     width: 100vw;
     height: 100vh;
 }
 
-.Container1 {
+.ContainerAtendente {
     width: 100vw;
     height: 100vh;
 }
 
   
-.Titulo {
+.TituloAtendente {
     display: flexbox;
 }
 
-.titulo {
+.tituloAtendente {
     font-size: 40px;
     font-family: 'Times New Roman', Times, serif;
     margin-top: 25px;
@@ -24,7 +24,7 @@
 }
 
 
-.centro{
+.centroAtendente{
     width: 100%;
     height: 100%;
     display: flex;
@@ -34,7 +34,7 @@
     flex-direction: column;
 }
 
-.info-chamadas{
+.info-chamadasAtendente{
     width: 75vw;
     height: 5vh;
     background-color: #f3f3f3;
@@ -44,7 +44,7 @@
 
 }
 
-.info-chamadas-result{
+.info-chamadas-resultAtendente{
     width: 75vw;
     height: 5vh;
     display: flex;

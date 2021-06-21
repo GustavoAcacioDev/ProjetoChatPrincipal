@@ -1,9 +1,8 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
 import '../hamburger/index.css';
-import { Navbar, Nav,  } from 'react-bootstrap';
+import {Nav} from 'react-bootstrap';
 
 export default function SimpleMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);

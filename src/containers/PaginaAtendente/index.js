@@ -1,19 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { } from 'react-bootstrap';
-import { auth, firestore } from 'firebase';
+import firebase, { auth, firestore } from 'firebase';
+import { MdPerson } from 'react-icons/md'
 import './index.css';
 import Menu from '../../components/Menu/index';
 import { PersonCircle, Clock, Chat } from 'react-bootstrap-icons';
 import { useDispatch, useSelector } from 'react-redux';
 import jwt_decode from "jwt-decode";
-import { listagemUsuarios, getRealtimeUsers } from '../../actions';
+import { listagemUsuarios, getRealtimeUsers, getYourUser } from '../../actions';
+
+
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 
 const PerfilAtendente = (props) => {
 
     const dispatch = useDispatch();
-    const auth = useSelector(state => state.auth);
-    const user = useSelector(state => state.user);
+    const auth = firebase.auth();
     const [chatStarted, setChatStarted] = useState(false);
     const [chatUser, setChatUser] = useState('');
     const [cpf, setCpf] = useState('');
@@ -23,124 +26,149 @@ const PerfilAtendente = (props) => {
 
 
 
-    useEffect(() => {
-
-        unsubscribe = dispatch(getRealtimeUsers(auth.uid))
-            .then(unsubscribe => {
-                return unsubscribe;
-            })
-            .catch(error => {
-                console.log(error);
-            })
 
 
+    /*const [user] = useAuthState(auth);*/
 
+    const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null;
 
-    }, []);
-
-    useEffect(() => {
-        return () => {
-            //cleanup
-            unsubscribe.then(f => f()).catch(error => console.log(error));
-
-        }
-    }, []);
-
-    
-
-
+    console.log(user)
 
 
     return (
 
-        <div className="ContainerPrincipal2" >
+        <div className="ContainerPrincipalAtendente" >
 
             <Menu />
 
-            <div className="Container1">
-                <div className="Titulo">
-                    <p className='titulo'>Perfil Atendente</p>
+            <div className="ContainerAtendente">
+                <div className="TituloAtendente">
+                    <p className='tituloAtendente'>Perfil Atendente</p>
                 </div>
                 <hr style={{ width: "100%" }}></hr>
 
-                <div className="Container2">
-                    <div className="centro">
+                <div className="Container2Atendente">
+                    <div className="centroAtendente">
+
                         {/* div que engloba as infomações do  perfil do atendente */}
-                        <div style={{ height: "30vh", width: "80vw", backgroundColor: "white", borderRadius: "10px", marginTop: "1%" }}>
+                        <div style={{ height: "20vh", width: "80vw", backgroundColor: "white", borderRadius: "22px", marginTop: "50px", display: 'flex', justifyContent: 'center' }}>
 
-                            <div>
+                            <div style={{ width: '80%', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
 
-                                <div className="">
-                                    <p style={{ marginLeft: "6%", paddingTop: "2%" }}>  <PersonCircle
-                                        className='all'
-                                        color="black"
-                                        filter="invert(.4)"
-                                        size={40} /><Clock style={{ marginLeft: "6%", marginRight: "1%", }} className='all' color="black" size={15} />| Horário de inicio: 8:00 | Horário de término: 18:00 </p>
-                                    <hr style={{ width: "70vw", filter: 'invert(.8)', border: '1px solid #000' }} />
+                                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', borderBottom: 'solid 1px black' }} >
+                                    <div>
+                                        <MdPerson size={50} />
+                                    </div>
+                                    <div style={{ display: 'flex', marginLeft: '20px' }}>
+                                        <Clock size={30} />
+
+                                        <div style={{ marginLeft: '20px', fontSize: '20px', display: 'flex', marginTop: '2px' }}>
+                                            <p >| Horario de Inicio: </p> <p style={{ color: 'red' }}> {user.horarioInicio} </p><p style={{ marginLeft: '10px' }} >| Horario de Término: </p><p style={{ color: 'red' }}> {user.horarioTermino} </p>
+                                        </div>
+                                        <div style={{ display: 'flex', marginLeft: '70px', fontSize: '20px', marginTop: '2px' }}>
+                                            <p>Atendimentos em Andamento  </p> <p style={{ marginLeft: '15px' }}>| Atendimentos até o Momento</p>
+                                        </div>
+
+                                    </div>
                                 </div>
-
+                                <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', width: '90%', marginTop: '25px' }}>
+                                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                                        <h2 style={{ fontFamily: 'Times New Roman' }}>Nome: </h2><p style={{ marginLeft: '5px', fontSize: '20px' }}> {user.firstName} {user.lastName}</p>
+                                    </div>
+                                    <div style={{ display: 'flex', alignItems: 'center', marginTop: '20px' }}>
+                                        <h2 style={{ fontFamily: 'Times New Roman' }}>Email: </h2><p style={{ marginLeft: '5px', fontSize: '20px' }}> {user.email}</p>
+                                    </div>
+                                </div>
                             </div>
 
-                            <div className="">
-                                <p style={{ marginLeft: "6%" }}>Nome: { }</p>
-                                <p style={{ marginLeft: "6%" }}>Email: gustavo@email.com </p>
-                            </div>
+                            {/*<div className="">
+                                {/*<p style={{ marginLeft: "6%" }}>Nome: {user.firstName} {user.lastName}</p>
+                            </div>}
+                                <p style={{ marginLeft: "6%" }}>Email: { user.email} </p>*/}
 
                         </div>
 
                         {/* div que engloba as chamadas realizadas pelo atendente */}
-                        <div style={{ marginTop: '2%' }}>
 
-                            <div style={{ height: "48vh", width: "80vw", backgroundColor: "white", borderRadius: "10px", }}>
-                                <div style={{ display: "flex", marginLeft: "5%" }}>
+
+                        <div style={{ height: "48vh", width: "80vw", backgroundColor: "white", borderRadius: "22px", marginTop: '100px', display: 'flex', justifyContent: 'center' }}>
+
+                            <div style={{width: '80%', height: '100%' }}>
+                                <div style={{width: '100%', height: '25%', display: 'flex', alignItems: 'center' }}>
+                                
                                     <Chat style={{ marginTop: "1%" }} className='all' color="black" filter="invert(.4)" size={40} />
-                                    <p style={{ fontSize: "20px", marginLeft: "1%" }}>Chamados</p>
+                                    <p style={{ fontSize: "20px", marginLeft: "1%", marginTop:'10px' }}>Chamados</p>
                                 </div>
-                                <div style={{ marginLeft: "3%", alignItems: "center", marginTop: "1%" }} className="info-chamadas">
-
-                                    <p style={{ marginLeft: "6%", }}>Título</p>
-                                    <ul style={{ display: "flex", listStyle: "none", alignItems: "center" }}>
-                                        <li style={{ marginLeft: "-200%", }}>Cliente</li>
-                                        <li style={{ marginLeft: "130%" }}>Data</li>
-                                    </ul>
-
+                                
+                                <div style={{width: '100%', height: '10%', backgroundColor: '#F4F4F4', display: 'flex', }}>
+                                    <div style={{width: '50%', height: '100%', display: 'flex', alignItems: 'center'}}>
+                                        <h3 style={{marginLeft: '30px'}} >Titulo</h3>
+                                    </div>
+                                    <div style={{width: '50%', height: '100%', display: 'flex', justifyContent: 'space-around', alignItems: 'center'}}>
+                                        <h3>Cliente</h3>
+                                        <h3 style={{marginRight: '20px'}}>Data</h3>
+                                    </div>
                                 </div>
-
-                                <div style={{ marginLeft: "3%", alignItems: "center", marginTop: "2%" }} className="info-chamadas-result">
-
-                                    <p style={{ marginLeft: "2%", }}>Problema com conta</p>
-                                    <ul style={{ display: "flex", listStyle: "none", alignItems: "center" }}>
-                                        <li style={{ marginLeft: "-80%", }}>Eduardo</li>
-                                        <li style={{ marginLeft: "55%" }}>10/06/2020</li>
-                                    </ul>
-
+                                
+                                
+                                <div style={{width: '100%', height: '10%', display: 'flex',marginTop: '20px' }}>
+                                    <div style={{width: '50%', height: '100%', display: 'flex', alignItems: 'center'}}>
+                                        <h3 style={{marginLeft: '30px'}} >Problemas com conta</h3>
+                                    </div>
+                                    <div style={{width: '50%', height: '100%', display: 'flex', justifyContent: 'space-around', alignItems: 'center'}}>
+                                        <p>{user.firstName}</p>
+                                        <p>20/01/2021</p>
+                                    </div>
                                 </div>
-                                <hr style={{ maxWidth: "75vw" }}></hr>
-                                <div style={{ marginLeft: "3%", alignItems: "center", marginTop: "1%" }} className="info-chamadas-result">
-
-                                    <p style={{ marginLeft: "2%", }}>Problema com conta</p>
-                                    <ul style={{ display: "flex", listStyle: "none", alignItems: "center" }}>
-                                        <li style={{ marginLeft: "-80%" }}>Matheus</li>
-                                        <li style={{ marginLeft: "55%" }}>10/06/2020</li>
-                                    </ul>
-
+                                <hr />
+                                
+                                <div style={{width: '100%', height: '10%', display: 'flex',marginTop: '20px' }}>
+                                    <div style={{width: '50%', height: '100%', display: 'flex', alignItems: 'center'}}>
+                                        <h3 style={{marginLeft: '30px'}} >Problemas com conta</h3>
+                                    </div>
+                                    <div style={{width: '50%', height: '100%', display: 'flex', justifyContent: 'space-around', alignItems: 'center'}}>
+                                        <p>{user.firstName}</p>
+                                        <p>20/01/2021</p>
+                                    </div>
                                 </div>
-                                <hr style={{ maxWidth: "75vw" }}></hr>
-                                <div style={{ marginLeft: "3%", alignItems: "center", marginTop: "1%" }} className="info-chamadas-result">
-
-                                    <p style={{ marginLeft: "2%", }}>Problema com conta</p>
-                                    <ul style={{ display: "flex", listStyle: "none", alignItems: "center" }}>
-                                        <li style={{ marginLeft: "-80%", }}>Samanta</li>
-                                        <li style={{ marginLeft: "55%" }}>10/06/2020</li>
-                                    </ul>
-
+                                <hr />
+                                
+                                <div style={{width: '100%', height: '10%', display: 'flex',marginTop: '20px' }}>
+                                    <div style={{width: '50%', height: '100%', display: 'flex', alignItems: 'center'}}>
+                                        <h3 style={{marginLeft: '30px'}} >Problemas com conta</h3>
+                                    </div>
+                                    <div style={{width: '50%', height: '100%', display: 'flex', justifyContent: 'space-around', alignItems: 'center'}}>
+                                        <p>{user.firstName}</p>
+                                        <p>20/01/2021</p>
+                                    </div>
                                 </div>
-                                <hr style={{ maxWidth: "75vw" }}></hr>
-
+                                <hr />
+                                
+                                <div style={{width: '100%', height: '10%', display: 'flex',marginTop: '20px' }}>
+                                    <div style={{width: '50%', height: '100%', display: 'flex', alignItems: 'center'}}>
+                                        <h3 style={{marginLeft: '30px'}} >Problemas com conta</h3>
+                                    </div>
+                                    <div style={{width: '50%', height: '100%', display: 'flex', justifyContent: 'space-around', alignItems: 'center'}}>
+                                        <p>{user.firstName}</p>
+                                        <p>20/01/2021</p>
+                                    </div>
+                                </div>
+                                <hr/>
                             </div>
 
 
+
+
+
+
+
+
+
+                            
+
                         </div>
+
+
 
                     </div>
                 </div>

@@ -46,57 +46,57 @@ const RegisterPage = (props) => {
   }
 
   return (
-    <div className="pai2" >
+    <div className="paiCadastro" >
 
 
-      <div className="container2" >
+      <div className="containerCadastro" >
 
         <Form onSubmit={registerUser}>
 
 
-          <h1 className="titulo2" >Cadastre um Atendente</h1>
+          <h1 className="tituloCadastro" >Cadastre um Atendente</h1>
 
-          <div className="conjunto1" style={{ marginTop: '100px' }}>
+          <div className="conjuntoCadastro" style={{ marginTop: '100px' }}>
 
             <div style={{ marginRight: '20px' }}>
 
               <Form.Group controlId="name">
-                <input type="text" className="nome" placeholder="Nome" name='firstName' value={firstName} onChange={(e) => setFirstName(e.target.value)} required />
+                <input type="text" className="nomeCadastro" placeholder="Nome" name='firstName' value={firstName} onChange={(e) => setFirstName(e.target.value)} required />
               </Form.Group>
             </div>
 
             <div>
 
               <Form.Group controlId="secondName">
-                <input type="text" className="email2" placeholder="Sobrenome" name='lastName' value={lastName} onChange={(e) => setLastName(e.target.value)} required />
+                <input type="text" className="emailCadastro" placeholder="Sobrenome" name='lastName' value={lastName} onChange={(e) => setLastName(e.target.value)} required />
               </Form.Group>
             </div>
 
           </div>
 
-          <div className="conjunto2">
+          <div className="conjuntoCadastro">
             <div style={{ marginRight: '20px' }}>
 
               <Form.Group controlId="formBasicEmail">
-                <input type="email" className="email2" placeholder="Email" name='email' value={email} onChange={(e) => setEmail(e.target.value)} required />
+                <input type="email" className="emailCadastro" placeholder="Email" name='email' x required />
               </Form.Group>
             </div>
 
             <div>
 
               <Form.Group controlId="password">
-                <input type="password" className="senha2" placeholder="Senha" name='senha' value={password} onChange={(e) => setPassword(e.target.value)} required />
+                <input type="password" className="senhaCadastro" placeholder="Senha" name='senha' value={password} onChange={(e) => setPassword(e.target.value)} required />
               </Form.Group>
             </div>
 
 
           </div>
 
-          <div className="conjunto3">
+          <div className="conjuntoCadastro">
             <div style={{ marginRight: '20px' }}>
 
               <Form.Group controlId="cpf">
-                <input className="cpf" type="text" placeholder="CPF" name='cpf' value={cpf} onChange={(e) => setCpf(e.target.value)} required />
+                <input className="cpfCadastro" type="text" placeholder="CPF" name='cpf' value={cpf} onChange={(e) => setCpf(e.target.value)} required />
               </Form.Group>
             </div>
 
@@ -105,41 +105,41 @@ const RegisterPage = (props) => {
             <div >
 
               <Form.Group controlId="phone">
-                <input type="tel" className="telefone" placeholder="Telefone" name='telefone' value={telefone} onChange={(e) => setTel(e.target.value)} required />
+                <input type="tel" className="telefoneCadastro" placeholder="Telefone" name='telefone' value={telefone} onChange={(e) => setTel(e.target.value)} required />
               </Form.Group>
             </div>
           </div>
 
-          <div className="conjunto5" style={{ display: 'flex', justifyContent: 'center', }}>
+          <div className="conjuntoCadastro" style={{ display: 'flex', justifyContent: 'center', }}>
             <div style={{ marginRight: '20px' }}>
 
               <Form.Group controlId="cep">
-                <input className="cpf" type="text" placeholder="CEP" name='cpf' value={cep} onChange={(e) => setCep(e.target.value)} required />
+                <input className="cpfCadastro" type="text" placeholder="CEP" name='cpf' value={cep} onChange={(e) => setCep(e.target.value)} required />
               </Form.Group>
             </div>
 
             <Form.Group controlId="especificacao">
-              <input type="text" className="especificacao" placeholder="Especificação" value={especializacao} onChange={(e) => setEspec(e.target.value)} name='especializacao' required />
+              <input type="text" className="especificacaoCadastro" placeholder="Especificação" value={especializacao} onChange={(e) => setEspec(e.target.value)} name='especializacao' required />
             </Form.Group>
           </div>
 
-          <div className="conjunto4">
+          <div className="conjuntoCadastro">
             <div style={{ marginRight: '20px' }}>
               <Form.Group controlId="time">
-                <input className="horaInicio" type="text" placeholder="Informe o horário de início" name='horarioInicio' value={horarioInicio} onChange={(e) => setInicio(e.target.value)} required />
+                <input className="horaInicioCadastro" type="text" placeholder="Informe o horário de início" name='horarioInicio' value={horarioInicio} onChange={(e) => setInicio(e.target.value)} required />
               </Form.Group>
             </div>
             <div>
               <Form.Group controlId="cpf">
-                <input className="horaTermino" type="text" placeholder="Informe o horário de Término" name='horarioTermino' value={horarioTermino} onChange={(e) => setTermino(e.target.value)} required />
+                <input className="horaTerminoCadastro" type="text" placeholder="Informe o horário de Término" name='horarioTermino' value={horarioTermino} onChange={(e) => setTermino(e.target.value)} required />
               </Form.Group>
             </div>
           </div>
 
 
 
-          <div className="botao2" >
-            <button className='botao-cadastrar' type='submit'>Cadastrar</button>
+          <div className="botaoCadastro" >
+            <button className='botao-cadastrarCadastro' type='submit'>Cadastrar</button>
           </div>
 
         </Form>

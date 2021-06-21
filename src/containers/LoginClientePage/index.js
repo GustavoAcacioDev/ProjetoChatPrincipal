@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { Form, Button } from 'react-bootstrap';
-import Layout from '../../components/Layout';
-import Card from '../../components/UI/Card';
-import { signin, isLoggedInUser, signinUser } from '../../actions';
+import React, { useState,} from 'react';
+import { Form} from 'react-bootstrap';
+import { signin} from '../../actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import '../LoginClientePage/login.css';

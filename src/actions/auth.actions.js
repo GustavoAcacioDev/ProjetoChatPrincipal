@@ -47,6 +47,9 @@ export const signupAtendente = (user) => {
                                     cpf: user.cpf,
                                     cep: user.cep,
                                     especializacao: user.especializacao,
+                                    telefone: user.telefone,
+                                    horarioInicio: user.horarioInicio,
+                                    horarioTermino: user.horarioTermino,
                                     uid: data.user.uid,
                                     email: user.email
                                 }
@@ -76,47 +79,72 @@ export const signupAtendente = (user) => {
 
 }
 
-export const listagemUsuarios = (uid) => {
+export const signin = (user) => {
+    return async dispatch => {
 
-    return async () => {
+        dispatch({ type: `${authConstanst.USER_LOGIN}_REQUEST` });
+        auth()
+            .signInWithEmailAndPassword(user.email, user.password)
+            .then((data) => {
+                console.log(data.user);
 
-        const [firstName, setFirstName] = useState('');
-        const [lastName, setLastName] = useState('');
-        const [email, setEmail] = useState('');
-        const [especializacao, setEspec] = useState('');
-        const [telefone, setTel] = useState('');
-        const [horarioInicio, setInicio] = useState('');
-        const [horarioTermino, setTermino] = useState('');
-        const [cep, setCep] = useState('');
-        const [password, setPassword] = useState('');
-        const [cpf, setCpf] = useState('');
-        const [chatUser, setChatUser] = ('');
-        const [useruid, setUserUid] = ('');
-        const dispatch = useDispatch();
-        const auth = useSelector(state => state.auth);
 
-        const db = firestore();
+                const db = firestore();
+                db.collection('users').doc('tipoUsuario').collection('userAdmin')
+                    .doc(data.user.uid)
+                    .update({
+                        isOnline: true
+                    })
+                    .then(() => {
+                        const name = data.user.displayName.split(" ");
+                        const firstName = name[0];
+                        const lastName = name[1];
 
-        const unsubscribe = db.collection("users").doc('tipoUsuario').collection('userAdmin')
-                //.where("uid", "!=", uid)
-                .onSnapshot((querySnapshot) => {
-                    const users = [];
-                    querySnapshot.forEach(function (doc) {
-                        if (doc.data().uid === uid) {
-                            users.push(doc.data());
-                        }
-                    });
-                    //console.log(users);
 
-                    dispatch({
-                        type: `${userConstants.GET_REALTIME_USERS}_SUCCESS`,
-                        payload: { users }
-                    });
+                        db.collection('users').doc('tipoUsuario').collection('userAdmin')
+                            .doc(data.user.uid)
+                            .get().then((doc) => {
+                                const loggedInUser = {
+                                    firstName: doc.data().firstName,
+                                    lastName: doc.data().lastName,
+                                    cpf: doc.data().cpf,
+                                    cep: doc.data().cep,
+                                    especializacao: doc.data().especializacao,
+                                    telefone: doc.data().telefone,
+                                    horarioInicio: doc.data().horarioInicio,
+                                    horarioTermino: doc.data().horarioTermino,
+                                    uid: data.user.uid,
+                                    email: user.email
+                                }
+                                localStorage.setItem('user', JSON.stringify(loggedInUser));
 
-                });
-            return unsubscribe;
+                                dispatch({
+                                    type: `${authConstanst.USER_LOGIN}_SUCCESS`,
+                                    payload: { user: loggedInUser }
+                                });
+                            }).catch(error => { console.log(error) })
+
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    })
+
+
+
+
+
+            })
+            .catch(error => {
+                console.log(error);
+                dispatch({
+                    type: `${authConstanst.USER_LOGIN}_FAILURE`,
+                    payload: { error }
+                })
+            })
+
+
+
     }
-
 }
 
 
@@ -183,65 +211,7 @@ export const signupUser = (user) => {
 
 }
 
-export const signin = (user) => {
-    return async dispatch => {
 
-        dispatch({ type: `${authConstanst.USER_LOGIN}_REQUEST` });
-        auth()
-            .signInWithEmailAndPassword(user.email, user.password)
-            .then((data) => {
-                console.log(data);
-
-
-                const db = firestore();
-                db.collection('users').doc('tipoUsuario').collection('userAdmin')
-                    .doc(data.user.uid)
-                    .update({
-                        isOnline: true
-                    })
-                    .then(() => {
-                        const name = data.user.displayName.split(" ");
-                        const firstName = name[0];
-                        const lastName = name[1];
-
-                        const loggedInUser = {
-                            firstName: user.firstName,
-                            lastName: user.lastName,
-                            cpf: user.cpf,
-                            cep: user.cep,
-                            especializacao: user.especializacao,
-                            uid: data.user.uid,
-                            email: user.email
-                        }
-
-                        localStorage.setItem('user', JSON.stringify(loggedInUser));
-
-                        dispatch({
-                            type: `${authConstanst.USER_LOGIN}_SUCCESS`,
-                            payload: { user: loggedInUser }
-                        });
-                    })
-                    .catch(error => {
-                        console.log(error)
-                    })
-
-
-
-
-
-            })
-            .catch(error => {
-                console.log(error);
-                dispatch({
-                    type: `${authConstanst.USER_LOGIN}_FAILURE`,
-                    payload: { error }
-                })
-            })
-
-
-
-    }
-}
 
 export const signinUser = (user) => {
     return async dispatch => {
@@ -358,3 +328,10 @@ export const logout = (uid) => {
     }
 }
 
+export const CriarAtendimento = (uid) => {
+    return async dispatch => {
+        const db = firestore()
+
+        db.collection('Atendimento').doc(uid)
+    }
+}

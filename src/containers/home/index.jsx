@@ -1,8 +1,7 @@
 
 import React, { Component } from 'react';
-import { Jumbotron, Container, Col } from 'react-bootstrap';
+import { Jumbotron, Container } from 'react-bootstrap';
 import Menu from './../../components/menuSamanta/index';
-import { Button } from 'bootstrap';
 import Banner from '../../img/BannerDeVerdade.jpg';
 import './../home/index.css';
 
@@ -54,7 +53,7 @@ window.scrollTo(0,0)
             </div>
           </div>
         </Container>
-{/*
+
         <Container id="Quemsomos">
           <div className='quemSomos'>
             <img className="coletividade" src={Imagem} />
@@ -158,7 +157,7 @@ window.scrollTo(0,0)
           </div>
                   
         </Container>
-nsjsj*/}
+
 
       </Jumbotron>
 
